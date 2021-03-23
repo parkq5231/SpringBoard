@@ -2,6 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.company.board.service.impl.BoardMapper">
+	<!-- 게시판 -->
 	<select id="getBoardList"
 		resultType="com.company.board.service.BoardVO">
 		SELECT *
@@ -18,5 +19,22 @@
 		parameterType="com.company.board.service.BoardVO">
 		INSERT INTO BOARD2
 		VALUES( #{seq}, #{title} )
+	</insert>
+	<!-- 댓글 -->
+	<!-- 게시글의 댓글 목록 -->
+	<!-- parameter type 생략가능 -->
+	<select id="getReplyList" resultType="ReplyVO">
+		SELECT *
+		FROM REPLY
+		WHERE BOARD_SEQ = #{board_seq}
+	</select>
+	<!-- 댓글 등록 -->
+	<insert id="insertReply">
+		INSERT INTO REPLY
+			VALUES( 
+			( SELECT NVL(MAX(SEQ),0)+1 FROM REPLY ),
+			#{content},	
+			#{board_seq}
+		  	)
 	</insert>
 </mapper>
