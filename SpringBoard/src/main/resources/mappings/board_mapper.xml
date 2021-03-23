@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.company.board.service.impl.BoardMapper">
+	<select id="getBoardList"
+		resultType="com.company.board.service.BoardVO">
+		SELECT *
+		FROM BOARD2
+	</select>
+	<select id="getBoard"
+		resultType="com.company.board.service.BoardVO"
+		parameterType="com.company.board.service.BoardVO">
+		SELECT *
+		FROM BOARD2
+		WHERE SEQ = #{seq}
+	</select>
+	<insert id="insertBoard"
+		parameterType="com.company.board.service.BoardVO">
+		INSERT INTO BOARD2
+		VALUES( #{seq}, #{title} )
+	</insert>
+</mapper>
